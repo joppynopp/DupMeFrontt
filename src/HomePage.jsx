@@ -26,6 +26,7 @@ const HomePage = () => {
         />
       </div>
       <p className="wait-text">wait till both players ready</p>
+      <p className="wait-text">cat</p>
     </div>
   );
 };

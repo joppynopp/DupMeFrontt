@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './App.css'; // Assuming you are using a global stylesheet
+import './App.css'; 
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -18,15 +18,14 @@ const HomePage = () => {
           className="ready-button"
           onClick={() => navigate('/game')}
         />
+        <p className="wait-text">'Wait till both players ready'</p>
         <img
           src="/homepage_image/how_to_play.png"
           alt="How to Play Button"
           className="how-to-play-button"
-          onClick={() => navigate('/how-to-play')}
+          onClick={() => navigate('/select')}
         />
       </div>
-      <p className="wait-text">wait till both players ready</p>
-      <p className="wait-text">cat</p>
     </div>
   );
 };

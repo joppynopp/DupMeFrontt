@@ -1,0 +1,11 @@
+.container{
+    height: 95;
+    width: 95;
+    background-color: #45bc2f;
+
+}
+.section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

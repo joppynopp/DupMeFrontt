@@ -1,11 +1,114 @@
-.container{
-    height: 95;
-    width: 95;
-    background-color: #45bc2f;
-
-}
-.section{
+body {
+    background-color: #5e2d2f;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.game-container {
+    width: 165vh;
+    height: 90vh;
+    padding: 20px;
+    background-color: #462521;
+    text-align: center;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.user {
+    width: 25%;
+}
+
+.user h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.user img {
+    width: 80px;
+    height: 80px;
+}
+
+.score {
+    font-size: 36px;
+    margin: 10px 0;
+}
+
+.time {
+    width: 20%;
+}
+
+.time .timer {
+    font-size: 36px;
+    margin: 10px 0;
+}
+
+.gameplay {
+    margin-bottom: 20px;
+}
+
+.status {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.sequence-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.sequence {
+    width: 50px;
+    height: 70px;
+    background-color: #d9b796;
+    border-radius: 5px;
+}
+
+.submit {
+    padding: 10px 20px;
+    background-color: #68625A;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border: 5px solid;
+    border-color: #826C34;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
+
+.replay, .reset {
+    padding: 10px;
+    background-color: #68625A;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.piano-keys {
+    display: flex;
+    gap: 5px;
+}
+
+.key {
+    width: 40px;
+    height: 100px;
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 5px;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+

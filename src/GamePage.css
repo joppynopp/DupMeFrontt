@@ -99,6 +99,16 @@ body {
   width: 75%;
 }
 
+.turn-pointer{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.turn-pointer img{
+  width: 75px;
+}
+
 .gameplay {
   margin-bottom: 10px;
   display: flex;
@@ -124,8 +134,16 @@ body {
 .sequence {
   width: 80px;
   height: 120px;
-  background-color: #9e9595;
+  background-color: white;
   border: #ffe0b5 solid 7px;
+  display: flex;
+  justify-content: center;  /* Horizontally center the content */
+  align-items: center; 
+}
+
+.note{
+  font-size: 40px;
+  color: #462521;
 }
 
 .submit {
@@ -133,7 +151,7 @@ body {
   height: 50px;
   padding-left: 33px;
   padding-top: 3px;
-  background-color: #68625a;
+  background-color: #ffe0b5;
   color: #462521;
   cursor: pointer;
   font-size: 30px;
@@ -151,11 +169,17 @@ body {
 .replay,
 .reset {
   padding: 10px;
-  background-color: #68625a;
+  background-color: #ffe0b5;
   color: #462521;
   border: none;
   cursor: pointer;
   font-size: 40px;
+  display: flex;
+  gap: 10px;
+}
+
+.replay img{
+  width: 50px;
 }
 
 .piano-keys {

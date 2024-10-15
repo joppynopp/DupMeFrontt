@@ -6,9 +6,9 @@ body {
     height: 100vh;
 }
 .game-container {
-    width: 165vh;
+    width: 170vh;
     height: 90vh;
-    padding: 20px;
+    padding: 10px;
     background-color: #462521;
     text-align: center;
 }
@@ -19,22 +19,43 @@ body {
     margin-bottom: 20px;
 }
 .user {
-    width: 25%;
+    width: 40%;
+    height: 35vh;
+    background-color: #FFE0B5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
+.user-and-score{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-and-score h3{
+    margin: 0px;
+    color: #462521;
+    font-size: 40px;
+}    
+
 .user h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 60px;
+    color: #462521;
+    margin: 0;
 }
 
 .user img {
-    width: 80px;
-    height: 80px;
+    width: 250px;
+    height: 250px;
+    margin-top: 20px;
 }
 
 .score {
-    font-size: 36px;
-    margin: 10px 0;
+    font-size: 90px;
+    margin: 0px;
+    color: black;
+    background-color: #D9D9D9;
 }
 
 .time {
@@ -44,6 +65,11 @@ body {
 .time .timer {
     font-size: 36px;
     margin: 10px 0;
+}
+
+.timer-background{
+    margin:0px 30px;
+    background-color: #D9D9D9;
 }
 
 .gameplay {

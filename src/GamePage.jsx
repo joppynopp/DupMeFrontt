@@ -6,24 +6,31 @@ import './GamePage.css'
 function GamePage() {
 
     return(
-        <div class="game-container">
-            <div class="header">
-                <div class="user user1">
-                    <h2>User 1</h2>
-                    <div class="score">00</div>
+        <div className="game-container">
+            <div className="header">
+                <div className="user user1">
+                    <div className='user-and-score'>
+                        <h2>User 1</h2>
+                        <div className="score">00</div>
+                        <h3>Score</h3>
+                    </div>
                     <img src="/Instruments/piano.png" alt="piano" />
-                    <p>Score</p>
                 </div>
-                <div class="time">
-                    <p>Time</p>
-                    <div class="timer">19</div>
+
+                <div className="time">
+                    <div className='timer-background'>
+                        <p>Time</p>
+                        <div className="timer">19</div>
+                    </div>
                     <p>Turn <span>👉</span></p>
                 </div>
                 <div class="user user2">
-                    <h2>User 2</h2>
-                    <div class="score">00</div>
                     <img src="/Instruments/trumpet.png" alt="trumpet" />
-                    <p>Score</p>
+                    <div className='user-and-score'>
+                        <h2>User 2</h2>
+                        <div class="score">00</div>
+                        <h3>Score</h3>
+                    </div>
                 </div>
             </div>
 

@@ -3,7 +3,7 @@ import './App.css'
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';  
-import GamePage from './gamepages/GamePage';  
+import GamePage from './GamePage';  
 import HowToPlayPage from './HowToPlayPage';  
 import './App.css'; 
 import Select from './Select';

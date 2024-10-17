@@ -5,6 +5,13 @@ import { useState, useEffect } from "react";
 
 function GamePage() {
   const [sequence, setSequence] = useState([]);
+  const [player1Sequence, setPlayer1Sequence] = useState([]);
+  const [player2Sequence, setPlayer2Sequence] = useState([]);
+  const [currentPlayer, setCurrentPlayer] = useState(1);
+  const [player1Score, setPlayer1Score] = useState(0);
+  const [player2Score, setPlayer2Score] = useState(0);
+  const [isCreating, setIsCreating] = useState(true);
+  
 
   // Map key presses and clicks to musical notes
   const noteMap = {
@@ -21,9 +28,10 @@ function GamePage() {
   useEffect(() => {
     const handleKeyPress = (event) => {
       const noteInfo = noteMap[event.key];
-      if (noteInfo) {
-        addNoteToSequence(noteInfo.note);  // Pass only the note string
-        playSound(noteInfo.sound);  // Play the corresponding sound
+      if (noteInfo && sequence.length < 5) {
+        // Prevent adding more than 5 notes
+        addNoteToSequence(noteInfo.note);
+        playSound(noteInfo.sound);
       }
     };
 
@@ -32,11 +40,11 @@ function GamePage() {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, []);
+  }, [sequence]);
 
   const playSound = (soundFile) => {
     const audio = new Audio(soundFile);
-    audio.volume = 0.2;  // Set the volume to 20% (adjust as needed)
+    audio.volume = 0.2; // Set the volume to 20% (adjust as needed)
     audio.play();
   };
 
@@ -56,13 +64,52 @@ function GamePage() {
     setSequence([]); // Reset the sequence to an empty array
   };
 
+  const resetGame = () => {
+    setPlayer1Sequence([]);
+    setPlayer2Sequence([]);
+    resetSequence();
+  };
+
+  const handleSubmit = () => {
+    if (sequence.length === 5) {
+      if (isCreating) {
+        // If the current player is creating
+        if (currentPlayer === 1) {
+          setPlayer1Sequence(sequence); // Store Player 1's sequence
+        } else {
+          setPlayer2Sequence(sequence); // Store Player 2's sequence
+        }
+      } else {
+        // If the current player is matching
+        if (currentPlayer === 1) {
+          // Player 1 is matching Player 2's sequence
+          if (sequence.join("") === player2Sequence.join("")) {
+            setPlayer1Score((prevScore) => prevScore + 5); // Increase Player 1's score by 5 if sequences match
+          }
+        } else {
+          // Player 2 is matching Player 1's sequence
+          if (sequence.join("") === player1Sequence.join("")) {
+            setPlayer2Score((prevScore) => prevScore + 5); // Increase Player 2's score by 5 if sequences match
+          }
+        }
+      }
+
+      // After submission, reset the sequence for the next turn
+      resetSequence();
+
+      // Switch the current player and toggle between creating and matching
+      setCurrentPlayer((prevPlayer) => (prevPlayer === 1 ? 2 : 1));
+      setIsCreating((prevIsCreating) => !prevIsCreating);
+    }
+  };
+
   return (
     <div className="game-container">
       <div className="header">
         <div className="user user1">
           <div className="user-and-score">
             <h2>User 1</h2>
-            <div className="score">00</div>
+            <div className="score">{player1Score}</div>
             <h3>Score</h3>
           </div>
           <img src="/Instruments/piano.png" alt="piano" />
@@ -75,8 +122,11 @@ function GamePage() {
             <div className="timer">19</div>
           </div>
           <div className="turn-pointer">
-            <p className="turn">Turn</p>
-            <img src="/gamepage_image/point-right.png" alt="point-right" />
+            {currentPlayer === 1 ? (
+              <img src="/gamepage_image/turn-left.png" alt="turn-left" />
+            ) : (
+              <img src="/gamepage_image/turn-right.png" alt="turn-right" />
+            )}
           </div>
         </div>
 
@@ -84,18 +134,18 @@ function GamePage() {
           <img src="/Instruments/trumpet.png" alt="trumpet" />
           <div className="user-and-score">
             <h2>User 2</h2>
-            <div className="score">00</div>
+            <div className="score">{player2Score}</div>
             <h3>Score</h3>
           </div>
         </div>
       </div>
 
       <div className="gameplay">
-      <p className="status">Player2's creating a sequence...</p>
+        <p className="status">Player1's creating a sequence...</p>
         <div className="sequence-boxes">
           {sequence.map((note, index) => (
             <div key={index} className={`sequence note`}>
-              {note}  {/* Render only the note string */}
+              {note} {/* Render only the note string */}
             </div>
           ))}
           {/* Empty boxes for remaining sequence slots */}
@@ -105,7 +155,9 @@ function GamePage() {
               <div key={index + sequence.length} className="sequence"></div>
             ))}
         </div>
-        <button className="submit">Submit</button>
+        <button className="submit" onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
 
       <div className="controls">
@@ -115,13 +167,69 @@ function GamePage() {
         </button>
 
         <div className="piano-keys">
-          <div className="white-key" onClick={() => { addNoteToSequence("C"); playSound("/notess/c.mp3"); }}>C</div>
-          <div className="white-key" onClick={() => { addNoteToSequence("D"); playSound("/notess/d.mp3"); }}>D</div>
-          <div className="white-key" onClick={() => { addNoteToSequence("E"); playSound("/notess/e.mp3"); }}>E</div>
-          <div className="white-key" onClick={() => { addNoteToSequence("F"); playSound("/notess/f.mp3"); }}>F</div>
-          <div className="white-key" onClick={() => { addNoteToSequence("G"); playSound("/notess/g.mp3"); }}>G</div>
-          <div className="white-key" onClick={() => { addNoteToSequence("A"); playSound("/notess/a.mp3"); }}>A</div>
-          <div className="white-key" onClick={() => { addNoteToSequence("B"); playSound("/notess/b.mp3"); }}>B</div>
+          <div
+            className="white-key"
+            onClick={() => {
+              addNoteToSequence("C");
+              playSound("/notess/c.mp3");
+            }}
+          >
+            C
+          </div>
+          <div
+            className="white-key"
+            onClick={() => {
+              addNoteToSequence("D");
+              playSound("/notess/d.mp3");
+            }}
+          >
+            D
+          </div>
+          <div
+            className="white-key"
+            onClick={() => {
+              addNoteToSequence("E");
+              playSound("/notess/e.mp3");
+            }}
+          >
+            E
+          </div>
+          <div
+            className="white-key"
+            onClick={() => {
+              addNoteToSequence("F");
+              playSound("/notess/f.mp3");
+            }}
+          >
+            F
+          </div>
+          <div
+            className="white-key"
+            onClick={() => {
+              addNoteToSequence("G");
+              playSound("/notess/g.mp3");
+            }}
+          >
+            G
+          </div>
+          <div
+            className="white-key"
+            onClick={() => {
+              addNoteToSequence("A");
+              playSound("/notess/a.mp3");
+            }}
+          >
+            A
+          </div>
+          <div
+            className="white-key"
+            onClick={() => {
+              addNoteToSequence("B");
+              playSound("/notess/b.mp3");
+            }}
+          >
+            B
+          </div>
         </div>
 
         <button className="reset" onClick={resetSequence}>
